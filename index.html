@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Bic Deals</title>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link href="style.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div class="container" ng-app="sortApp" ng-controller="mainController">
+        <div class="alert alert-info">
+            <h1><center>Bic Deals - Alpha v0.0.1</center></h1>
+            <h2><center>by puri</center></h2>
+            <p>Sort Type: {{ sortType }}</p>
+            <p>Sort Reverse: {{ sortReverse }}</p>
+            <p>Search Query: {{ searchITEM }}</p>
+        </div>
+
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <input type="text" class="form-control" placeholder="Search" ng-model="searchITEM">
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+                <tr>
+                    <td>
+                        <a href="#" ng-click="sortType = 'ITEM'; sortReverse = !sortReverse">
+                            ITEM
+                            <span ng-show="sortType == 'ITEM' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'ITEM' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="sortType = 'PRICE'; sortReverse = !sortReverse">
+                            PRICE
+                            <span ng-show="sortType == 'PRICE' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'PRICE' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="sortType = 'LINK'; sortReverse = !sortReverse">
+                            LINK
+                            <span ng-show="sortType == 'LINK' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'LINK' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="roll in ITEM | orderBy:sortType:sortReverse | filter:searchITEM">
+                    <td>{{ roll.ITEM }}</td>
+                    <td>{{ roll.PRICE }}</td>
+                    <td>{{ roll.LINK }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+    <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
